@@ -15,9 +15,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Menggunakan Gradle Build Action resmi agar versinya kompatibel
+      # --- BAGIAN PENTING UNTUK MEMPERBAIKI GRADLE ---
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.5  # Memaksa menggunakan Gradle 8.5 yang stabil
+      # -----------------------------------------------
 
       - name: Build with Gradle
         run: gradle assembleDebug
