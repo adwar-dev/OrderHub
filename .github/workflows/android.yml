@@ -1,17 +1,24 @@
 name: Build Android APK
+
 on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-      
-      # Perintah ini langsung memanggil gradle tanpa butuh file gradlew
+
+      # Menggunakan Gradle Build Action resmi agar versinya kompatibel
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
       - name: Build with Gradle
         run: gradle assembleDebug
 
